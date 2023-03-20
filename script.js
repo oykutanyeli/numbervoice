@@ -1,4 +1,4 @@
-let array = [];
+let array = []; 
 const voicesPath = "assets/voices/";
 let audios = [];
 
@@ -13,7 +13,6 @@ function read(number) {
         let audio = new Audio(voicesPath.concat("sifir.ogg"));
         audio.preload = "metadata";
         audio.onloadedmetadata = () => {
-            console.log(audio.duration);
             audio.play();
         }
         return;
@@ -225,3 +224,4 @@ async function delay(duration) {
 function onAudioEnded() {
     alert("It's over!!");
 };
+ 
