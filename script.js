@@ -1,8 +1,11 @@
-let array = []; 
+let array = [];
 const voicesPath = "assets/voices/";
 let audios = [];
+let audio;
 
 function read(number) {
+    if (!!audio)
+        audio.pause();
     array = [];
     audios = [];
 
@@ -10,12 +13,17 @@ function read(number) {
     let value = number.toString();
 
     if (value === "0") {
-        let audio = new Audio(voicesPath.concat("sifir.ogg"));
+        audio = new Audio(voicesPath.concat("sifir.ogg"));
         audio.preload = "metadata";
         audio.onloadedmetadata = () => {
             audio.play();
         }
         return;
+    }
+    else {
+        while (value.length !== 1 && value[0] === "0") {
+            value = value.substring(1);
+        }
     }
 
     // sayının karakter sayısı
@@ -193,15 +201,13 @@ function readZeros(index) {
 }
 
 function playAudio() {
-    // var audio = new Audio(`${voicesPath}${item}`);
-    // audio.play()
     callAudio(0);
 }
 
 async function callAudio(i) {
     let index = i;
     const element = audios[index];
-    let audio = new Audio(voicesPath.concat(element));
+    audio = new Audio(voicesPath.concat(element));
     audio.preload = "metadata";
     audio.onloadedmetadata = async function () {
         audio.play();
@@ -224,4 +230,3 @@ async function delay(duration) {
 function onAudioEnded() {
     alert("It's over!!");
 };
- 
